@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import { ChevronRight, BookOpen, Clock, HelpCircle } from 'lucide-react';
 
-const Blog = ({ isDark, setActiveTab }) => {
+const Blog = ({ isDark }) => {
+  const navigate = useNavigate();
   // 🚀 VIP AdSense Friendly Articles (Including New Tools)
   const articles = [
     {
@@ -101,7 +103,7 @@ const Blog = ({ isDark, setActiveTab }) => {
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.4, delay: i * 0.1 }}
-            onClick={() => setActiveTab(post.targetTab)}
+            onClick={() => navigate({ Resize: '/resize', 'Image Data Eraser': '/eraser', Scanner: '/scanner', 'Code Extractor': '/code-extractor', Palette: '/palette', 'Speed Test': '/speed-test' }[post.targetTab] || '/blog')}
             className={clsx(
               "p-6 md:p-8 rounded-[2rem] border-2 transition-all cursor-pointer group shadow-lg flex flex-col justify-between h-full hover:-translate-y-2", 
               isDark 

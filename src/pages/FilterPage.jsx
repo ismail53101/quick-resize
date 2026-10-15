@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { clsx } from 'clsx';
 import { Sliders, X, Download, ChevronRight, Eye, RefreshCcw, Sparkles, Save, UploadCloud, RotateCw, FlipHorizontal, FlipVertical, Palette, Settings2, Wand2 } from 'lucide-react';
 
-const FilterPage = ({ isDark, preview, setPreview, img, setImg, executeWithLimit, setActiveTab }) => {
+const FilterPage = ({ isDark, preview, setPreview, img, setImg, executeWithLimit }) => {
   // 1. Advanced Filters State (Added Temp, Tint, Noise)
   const defaultFilters = { brightness: 100, contrast: 100, saturate: 100, grayscale: 0, sepia: 0, blur: 0, hueRotate: 0, invert: 0, vignette: 0, temp: 0, tint: 0, noise: 0 };
   const [filters, setFilters] = useState(defaultFilters);

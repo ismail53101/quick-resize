@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { clsx } from 'clsx';
 import { Image as ImageIcon, X, Scissors, Lock, Unlock, Zap, Download, Sliders, ChevronRight } from 'lucide-react';
 
-const ResizerPage = ({ isDark, setActiveTab, setFilterPreview, setFilterImg, executeWithLimit }) => {
+const ResizerPage = ({ isDark, setFilterPreview, setFilterImg, executeWithLimit }) => {
+  const navigate = useNavigate();
   const [resizerImg, setResizerImg] = useState(null);
   const [resizerPreview, setResizerPreview] = useState(null);
   const [resizeDims, setResizeDims] = useState({ w: 0, h: 0 });
@@ -76,7 +78,7 @@ const ResizerPage = ({ isDark, setActiveTab, setFilterPreview, setFilterImg, exe
       ctx.drawImage(resizerImg, 0, 0, cvs.width, cvs.height);
       const resizedDataUrl = cvs.toDataURL(format, enhanceHD ? 1.0 : resizeQuality / 100);
       setFilterPreview(resizedDataUrl);
-      const imgObj = new Image(); imgObj.onload = () => { setFilterImg(imgObj); setActiveTab('Filter'); }; imgObj.src = resizedDataUrl;
+      const imgObj = new Image(); imgObj.onload = () => { setFilterImg(imgObj); navigate('/filter'); }; imgObj.src = resizedDataUrl;
     }
   };
 
@@ -107,7 +109,7 @@ const ResizerPage = ({ isDark, setActiveTab, setFilterPreview, setFilterImg, exe
             {/* SEO Interlinking */}
             <div className="text-center pt-4">
                <p className="text-[10px] md:text-xs font-bold opacity-60 uppercase tracking-widest flex items-center justify-center gap-1">
-                 Done Resizing? <button onClick={() => setActiveTab('Palette')} className="text-blue-500 hover:underline flex items-center">Extract Colors <ChevronRight size={12}/></button>
+                 Done Resizing? <button onClick={() => navigate('/palette')} className="text-blue-500 hover:underline flex items-center">Extract Colors <ChevronRight size={12}/></button>
                </p>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import { Image as ImageIcon, Share2, Sliders, ShieldCheck, FastForward, CheckCircle } from 'lucide-react';
@@ -15,7 +16,8 @@ const FeatureBadge = ({ icon: Icon, title, desc, colorClass, isDark }) => (
     </div>
 );
 
-const HomePage = ({ setActiveTab, isDark }) => {
+const HomePage = ({ isDark }) => {
+  const navigate = useNavigate();
 
   // 👇👇👇 ✨ SEO Code YAHAN Add Kiya Hai ✨ 👇👇👇
   useEffect(() => {
@@ -41,7 +43,7 @@ const HomePage = ({ setActiveTab, isDark }) => {
           { tab: 'Studio', icon: Share2, color: 'purple', title: 'Thumbnail Studio', desc: 'Add text, luxury filters & graphics.' },
           { tab: 'Filter', icon: Sliders, color: 'green', title: 'Pro Filters', desc: 'Studio effects without Photoshop.' }
         ].map((item, index) => (
-          <motion.div key={item.tab} onClick={() => setActiveTab(item.tab)} className={clsx("p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border cursor-pointer transition-all shadow-lg text-left", isDark ? "hover:bg-slate-800 border-slate-700/50" : "hover:bg-gray-100 border-gray-200", item.color === 'blue' ? "bg-blue-500/5" : item.color === 'green' ? "bg-green-500/5" : "bg-purple-500/5")} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }} whileHover={{ scale: 1.05, y: -5 }}>
+          <motion.div key={item.tab} onClick={() => navigate({ Resize: '/resize', Studio: '/studio', Filter: '/filter' }[item.tab])} className={clsx("p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border cursor-pointer transition-all shadow-lg text-left", isDark ? "hover:bg-slate-800 border-slate-700/50" : "hover:bg-gray-100 border-gray-200", item.color === 'blue' ? "bg-blue-500/5" : item.color === 'green' ? "bg-green-500/5" : "bg-purple-500/5")} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }} whileHover={{ scale: 1.05, y: -5 }}>
             <item.icon size={44} className={`mx-auto mb-3 md:mb-4 text-${item.color}-500`} />
             <h2 className="font-black text-xl md:text-2xl mb-2 italic text-center">{item.title}</h2>
             <p className="text-xs md:text-sm opacity-70 font-semibold text-center">{item.desc}</p>

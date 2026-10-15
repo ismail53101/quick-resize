@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { clsx } from 'clsx';
 import { Upload, FileBarChart, Activity, ChevronRight } from 'lucide-react';
 import JSZip from 'jszip'; 
 
-const CompressorPage = ({ isDark, executeWithLimit, setActiveTab }) => {
+const CompressorPage = ({ isDark, executeWithLimit }) => {
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [origBytes, setOrigBytes] = useState(0);
   const [origDisplay, setOrigDisplay] = useState('');
@@ -84,7 +86,7 @@ const CompressorPage = ({ isDark, executeWithLimit, setActiveTab }) => {
         {/* SEO Interlinking */}
         <div className="text-center pt-2">
            <p className="text-[10px] md:text-xs font-bold opacity-60 uppercase tracking-widest flex items-center justify-center gap-1">
-             Need to resize dimensions? <button onClick={() => setActiveTab('Resize')} className="text-purple-500 hover:underline flex items-center">Use Image Resizer <ChevronRight size={12}/></button>
+             Need to resize dimensions? <button onClick={() => navigate('/resize')} className="text-purple-500 hover:underline flex items-center">Use Image Resizer <ChevronRight size={12}/></button>
            </p>
         </div>
       </div>
